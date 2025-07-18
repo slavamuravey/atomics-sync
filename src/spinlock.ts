@@ -65,14 +65,14 @@ export class SpinLock {
       throw new PermissionError("current thread is not owner of lock");
     }
 
+    store(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
+
     if (
       compareExchange(lock, SpinLock.INDEX_STATE, SpinLock.STATE_LOCKED, SpinLock.STATE_UNLOCKED) ===
       SpinLock.STATE_UNLOCKED
     ) {
       throw new PermissionError("lock was not locked");
     }
-
-    store(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
   }
 
   private static checkThreadIdBeforeLock(lock: Int32Array<SharedArrayBuffer>, threadId: number) {

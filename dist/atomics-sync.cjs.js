@@ -69,10 +69,10 @@ class Mutex {
         if (load$3(mutex, Mutex.INDEX_OWNER) !== threadId) {
             throw new PermissionError("current thread is not owner of mutex");
         }
+        store$4(mutex, Mutex.INDEX_OWNER, Mutex.OWNER_EMPTY);
         if (compareExchange$3(mutex, Mutex.INDEX_STATE, Mutex.STATE_LOCKED, Mutex.STATE_UNLOCKED) === Mutex.STATE_UNLOCKED) {
             throw new PermissionError("mutex was not locked");
         }
-        store$4(mutex, Mutex.INDEX_OWNER, Mutex.OWNER_EMPTY);
         notify$2(mutex, Mutex.INDEX_STATE, 1);
     }
     static checkThreadIdBeforeLock(mutex, threadId) {
@@ -287,11 +287,11 @@ class SpinLock {
         if (load(lock, SpinLock.INDEX_OWNER) !== threadId) {
             throw new PermissionError("current thread is not owner of lock");
         }
+        store$1(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
         if (compareExchange$1(lock, SpinLock.INDEX_STATE, SpinLock.STATE_LOCKED, SpinLock.STATE_UNLOCKED) ===
             SpinLock.STATE_UNLOCKED) {
             throw new PermissionError("lock was not locked");
         }
-        store$1(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
     }
     static checkThreadIdBeforeLock(lock, threadId) {
         SpinLock.checkThreadIdIsValid(threadId);

@@ -1,6 +1,6 @@
 import { workerData } from "worker_threads";
 
-import { Semaphore } from "../../dist/index.js";
+import { Semaphore } from "../../../dist/index.js";
 
 const { sem, shared } = workerData;
 

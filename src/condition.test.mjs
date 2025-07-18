@@ -21,7 +21,9 @@ describe("Condition", () => {
     const shared = new Int32Array(new SharedArrayBuffer(4));
 
     for (let i = 0; i < THREADS; i++) {
-      const worker = new Worker("./src/workers/waiter.mjs", { workerData: { cond, mtx, shared, threadId: i + 1 } });
+      const worker = new Worker("./src/workers/condition/waiter.mjs", {
+        workerData: { cond, mtx, shared, threadId: i + 1 }
+      });
       promises.push(
         new Promise(resolve => {
           worker.on("message", () => {
@@ -54,7 +56,7 @@ describe("Condition", () => {
     const shared = new Int32Array(new SharedArrayBuffer(4));
 
     for (let i = 0; i < THREADS; i++) {
-      const worker = new Worker("./src/workers/waiter.mjs", {
+      const worker = new Worker("./src/workers/condition/waiter.mjs", {
         workerData: { cond, mtx, shared, threadId: i + 1 }
       });
       promises.push(

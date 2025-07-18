@@ -76,7 +76,7 @@ describe("Semaphore", () => {
     const sem = Semaphore.init(0);
     const shared = new Int32Array(new SharedArrayBuffer(4));
     // eslint-disable-next-line no-new
-    new Worker("./src/workers/notificator.mjs", { workerData: { sem, shared } });
+    new Worker("./src/workers/semaphore/notificator.mjs", { workerData: { sem, shared } });
     Semaphore.wait(sem);
     assert.equal(shared[0], 42);
   });

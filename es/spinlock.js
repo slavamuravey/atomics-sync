@@ -37,11 +37,11 @@ export class SpinLock {
         if (load(lock, SpinLock.INDEX_OWNER) !== threadId) {
             throw new PermissionError("current thread is not owner of lock");
         }
+        store(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
         if (compareExchange(lock, SpinLock.INDEX_STATE, SpinLock.STATE_LOCKED, SpinLock.STATE_UNLOCKED) ===
             SpinLock.STATE_UNLOCKED) {
             throw new PermissionError("lock was not locked");
         }
-        store(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
     }
     static checkThreadIdBeforeLock(lock, threadId) {
         SpinLock.checkThreadIdIsValid(threadId);

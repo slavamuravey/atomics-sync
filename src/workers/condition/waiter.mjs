@@ -1,6 +1,6 @@
 import { parentPort, workerData } from "worker_threads";
 
-import { Condition, Mutex } from "../../dist/index.js";
+import { Condition, Mutex } from "../../../dist/index.js";
 
 const { mtx, cond, threadId, shared } = workerData;
 

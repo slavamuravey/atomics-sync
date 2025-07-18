@@ -77,11 +77,11 @@ export class Mutex {
       throw new PermissionError("current thread is not owner of mutex");
     }
 
+    store(mutex, Mutex.INDEX_OWNER, Mutex.OWNER_EMPTY);
+
     if (compareExchange(mutex, Mutex.INDEX_STATE, Mutex.STATE_LOCKED, Mutex.STATE_UNLOCKED) === Mutex.STATE_UNLOCKED) {
       throw new PermissionError("mutex was not locked");
     }
-
-    store(mutex, Mutex.INDEX_OWNER, Mutex.OWNER_EMPTY);
 
     notify(mutex, Mutex.INDEX_STATE, 1);
   }

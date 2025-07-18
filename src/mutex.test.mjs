@@ -96,7 +96,9 @@ describe("Mutex", () => {
     const mtx = Mutex.init();
     const shared = new Int32Array(new SharedArrayBuffer(4));
     for (let i = 0; i < THREADS; i++) {
-      const worker = new Worker("./src/workers/incrementer.mjs", { workerData: { threadId: i + 1, shared, mtx } });
+      const worker = new Worker("./src/workers/mutex/incrementer.mjs", {
+        workerData: { threadId: i + 1, shared, mtx }
+      });
       promises.push(
         new Promise(resolve => {
           worker.on("message", () => {
