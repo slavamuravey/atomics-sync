@@ -73,6 +73,7 @@ describe("Mutex", () => {
   it("lock/unlock should be fast", () => {
     const mutex = Mutex.init();
     const start = performance.now();
+
     for (let i = 0; i < 10000; i++) {
       Mutex.lock(mutex, 123);
       Mutex.unlock(mutex, 123);
@@ -92,9 +93,9 @@ describe("Mutex", () => {
   it("should handle concurrent access (stress test)", async () => {
     const THREADS = 10;
     const promises = [];
-
     const mtx = Mutex.init();
     const shared = new Int32Array(new SharedArrayBuffer(4));
+
     for (let i = 0; i < THREADS; i++) {
       const worker = new Worker("./src/workers/mutex/incrementer.mjs", {
         workerData: { threadId: i + 1, shared, mtx }

@@ -73,6 +73,7 @@ describe("SpinLock", () => {
   it("lock/unlock should be fast", () => {
     const lock = SpinLock.init();
     const start = performance.now();
+
     for (let i = 0; i < 10000; i++) {
       SpinLock.lock(lock, 123);
       SpinLock.unlock(lock, 123);
@@ -84,9 +85,9 @@ describe("SpinLock", () => {
   it("should handle concurrent access (stress test)", async () => {
     const THREADS = 10;
     const promises = [];
-
     const lock = SpinLock.init();
     const shared = new Int32Array(new SharedArrayBuffer(4));
+
     for (let i = 0; i < THREADS; i++) {
       const worker = new Worker("./src/workers/spinlock/incrementer.mjs", {
         workerData: { threadId: i + 1, shared, lock }

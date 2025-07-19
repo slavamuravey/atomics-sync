@@ -27,9 +27,9 @@ describe("Once", () => {
     const once = Once.init();
     const THREADS = 10;
     const promises = [];
-
     const mtx = Mutex.init();
     const shared = new Int32Array(new SharedArrayBuffer(4));
+
     for (let i = 0; i < THREADS; i++) {
       const worker = new Worker("./src/workers/once/incrementer.mjs", {
         workerData: { threadId: i + 1, shared, mtx, once }
