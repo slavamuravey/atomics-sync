@@ -2,7 +2,20 @@ import { Condition } from "./condition";
 import { InvalidError } from "./errors";
 import { Mutex } from "./mutex";
 const { store, load, add } = Atomics;
+/**
+ * A synchronization primitive that enables multiple threads to wait for each other
+ * to reach a common execution point before continuing.
+ *
+ * Implements a reusable barrier using shared memory, mutex and condition variable.
+ */
 export class Barrier {
+    /**
+     * Initializes a new barrier with the specified thread count
+     * @param count Number of threads that must reach the barrier before continuing
+     * @returns Initialized BarrierObject with shared structures
+     * @throws {InvalidError} If count is not an integer
+     * @throws {RangeError} If count is <= 0
+     */
     static init(count) {
         Barrier.validateCount(count);
         const barrier = new BigInt64Array(new SharedArrayBuffer(BigInt64Array.BYTES_PER_ELEMENT * 3));
@@ -17,6 +30,12 @@ export class Barrier {
             cond
         };
     }
+    /**
+     * Makes the calling thread wait at the barrier until all threads have arrived
+     * @param barrier The barrier object to wait on
+     * @param threadId Unique identifier for the calling thread
+     * @returns true if this thread was the last to arrive (releases others), false otherwise
+     */
     static wait(barrier, threadId) {
         Mutex.lock(barrier.mutex, threadId);
         const generation = load(barrier.barrier, Barrier.INDEX_GENERATION);
@@ -38,6 +57,12 @@ export class Barrier {
             Mutex.unlock(barrier.mutex, threadId);
         }
     }
+    /**
+     * Validates that the thread count is a positive integer
+     * @param count Number to validate
+     * @throws {InvalidError} If count is not an integer
+     * @throws {RangeError} If count is <= 0
+     */
     static validateCount(count) {
         if (!Number.isInteger(count)) {
             throw new InvalidError("count should be integer");
@@ -47,7 +72,8 @@ export class Barrier {
         }
     }
 }
-Barrier.INDEX_COUNT = 0;
-Barrier.INDEX_WAITED = 1;
-Barrier.INDEX_GENERATION = 2;
+// Indexes for accessing different values in the barrier array
+Barrier.INDEX_COUNT = 0; // Stores total threads required
+Barrier.INDEX_WAITED = 1; // Stores number of threads currently waiting
+Barrier.INDEX_GENERATION = 2; // Stores current barrier generation
 //# sourceMappingURL=barrier.js.map

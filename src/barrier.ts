@@ -4,19 +4,39 @@ import { Mutex } from "./mutex";
 
 const { store, load, add } = Atomics;
 
+/**
+ * Barrier object containing shared memory structures for synchronization
+ * barrier - stores barrier state (thread count, waited count, and generation)
+ * mutex - mutex for protecting barrier access
+ * cond - condition variable for threads to wait on
+ */
 export interface BarrierObject {
   barrier: BigInt64Array<SharedArrayBuffer>;
   mutex: Int32Array<SharedArrayBuffer>;
   cond: Int32Array<SharedArrayBuffer>;
 }
 
+/**
+ * A synchronization primitive that enables multiple threads to wait for each other
+ * to reach a common execution point before continuing.
+ *
+ * Implements a reusable barrier using shared memory, mutex and condition variable.
+ */
 export class Barrier {
-  private static readonly INDEX_COUNT = 0;
+  // Indexes for accessing different values in the barrier array
+  private static readonly INDEX_COUNT = 0; // Stores total threads required
 
-  private static readonly INDEX_WAITED = 1;
+  private static readonly INDEX_WAITED = 1; // Stores number of threads currently waiting
 
-  private static readonly INDEX_GENERATION = 2;
+  private static readonly INDEX_GENERATION = 2; // Stores current barrier generation
 
+  /**
+   * Initializes a new barrier with the specified thread count
+   * @param count Number of threads that must reach the barrier before continuing
+   * @returns Initialized BarrierObject with shared structures
+   * @throws {InvalidError} If count is not an integer
+   * @throws {RangeError} If count is <= 0
+   */
   static init(count: number): BarrierObject {
     Barrier.validateCount(count);
 
@@ -34,6 +54,12 @@ export class Barrier {
     };
   }
 
+  /**
+   * Makes the calling thread wait at the barrier until all threads have arrived
+   * @param barrier The barrier object to wait on
+   * @param threadId Unique identifier for the calling thread
+   * @returns true if this thread was the last to arrive (releases others), false otherwise
+   */
   static wait(barrier: BarrierObject, threadId: number) {
     Mutex.lock(barrier.mutex, threadId);
 
@@ -60,6 +86,12 @@ export class Barrier {
     }
   }
 
+  /**
+   * Validates that the thread count is a positive integer
+   * @param count Number to validate
+   * @throws {InvalidError} If count is not an integer
+   * @throws {RangeError} If count is <= 0
+   */
   private static validateCount(count: number) {
     if (!Number.isInteger(count)) {
       throw new InvalidError("count should be integer");

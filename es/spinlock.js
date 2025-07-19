@@ -1,21 +1,44 @@
 import { DeadlockError, InvalidError, PermissionError } from "./errors.js";
 import { INT32_MAX_VALUE, INT32_MIN_VALUE } from "./limits.js";
 const { compareExchange, store, load } = Atomics;
+/**
+ * A spin lock implementation for low-level thread synchronization.
+ * Uses busy-waiting with atomic operations for acquiring the lock.
+ * More efficient than mutexes for very short critical sections.
+ * Tracks owning thread to prevent deadlocks and enforce proper usage.
+ */
 export class SpinLock {
+    /**
+     * Initializes a new spin lock in shared memory
+     * @returns A new Int32Array backed by SharedArrayBuffer with:
+     *          - index 0: state (initially unlocked)
+     *          - index 1: owner (initially empty)
+     */
     static init() {
         const lock = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT * 2));
         store(lock, SpinLock.INDEX_STATE, SpinLock.STATE_UNLOCKED);
         store(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
         return lock;
     }
+    /**
+     * Acquires the lock, spinning until available
+     * @param lock The spin lock to acquire
+     * @param threadId Unique identifier for the calling thread
+     * @throws {DeadlockError} If thread already owns the lock
+     * @throws {InvalidError} If threadId is invalid
+     * @note Uses Atomics.pause() when available to reduce contention
+     */
     static lock(lock, threadId) {
         SpinLock.checkThreadIdBeforeLock(lock, threadId);
+        // Spin-wait loop with atomic compare-exchange
         for (;;) {
+            // Attempt atomic acquisition
             if (compareExchange(lock, SpinLock.INDEX_STATE, SpinLock.STATE_UNLOCKED, SpinLock.STATE_LOCKED) ===
                 SpinLock.STATE_UNLOCKED) {
                 store(lock, SpinLock.INDEX_OWNER, threadId);
                 return;
             }
+            // Use pause instruction to reduce contention when available
             // @ts-ignore
             if (typeof Atomics.pause === "function") {
                 // @ts-ignore
@@ -23,6 +46,14 @@ export class SpinLock {
             }
         }
     }
+    /**
+     * Attempts to acquire the lock without spinning
+     * @param lock The spin lock to try
+     * @param threadId Unique identifier for the calling thread
+     * @returns true if lock acquired, false if lock was busy
+     * @throws {DeadlockError} If thread already owns the lock
+     * @throws {InvalidError} If threadId is invalid
+     */
     static tryLock(lock, threadId) {
         SpinLock.checkThreadIdBeforeLock(lock, threadId);
         if (compareExchange(lock, SpinLock.INDEX_STATE, SpinLock.STATE_UNLOCKED, SpinLock.STATE_LOCKED) ===
@@ -32,23 +63,46 @@ export class SpinLock {
         }
         return false;
     }
+    /**
+     * Releases the lock
+     * @param lock The spin lock to release
+     * @param threadId Unique identifier for the calling thread
+     * @throws {PermissionError} If thread doesn't own the lock or lock wasn't locked
+     * @throws {InvalidError} If threadId is invalid
+     */
     static unlock(lock, threadId) {
         SpinLock.checkThreadIdIsValid(threadId);
+        // Verify ownership
         if (load(lock, SpinLock.INDEX_OWNER) !== threadId) {
             throw new PermissionError("current thread is not owner of lock");
         }
+        // Clear owner first to prevent race conditions
         store(lock, SpinLock.INDEX_OWNER, SpinLock.OWNER_EMPTY);
+        // Verify locked state while unlocking
         if (compareExchange(lock, SpinLock.INDEX_STATE, SpinLock.STATE_LOCKED, SpinLock.STATE_UNLOCKED) ===
             SpinLock.STATE_UNLOCKED) {
             throw new PermissionError("lock was not locked");
         }
     }
+    /**
+     * Validates threadId and checks for deadlock conditions before locking
+     * @param lock The spin lock being acquired
+     * @param threadId The thread attempting to lock
+     * @throws {DeadlockError} If thread already owns lock
+     * @throws {InvalidError} If threadId is invalid
+     */
     static checkThreadIdBeforeLock(lock, threadId) {
         SpinLock.checkThreadIdIsValid(threadId);
         if (load(lock, SpinLock.INDEX_OWNER) === threadId) {
             throw new DeadlockError("thread already owns this lock");
         }
     }
+    /**
+     * Validates that a threadId is properly formatted and within range
+     * @param threadId The thread ID to validate
+     * @throws {InvalidError} If threadId is not an integer or is empty
+     * @throws {RangeError} If threadId is outside int32 range
+     */
     static checkThreadIdIsValid(threadId) {
         if (!Number.isInteger(threadId)) {
             throw new InvalidError("threadId should be int32");
@@ -61,9 +115,10 @@ export class SpinLock {
         }
     }
 }
-SpinLock.OWNER_EMPTY = 0;
-SpinLock.STATE_UNLOCKED = 0;
-SpinLock.STATE_LOCKED = 1;
-SpinLock.INDEX_STATE = 0;
-SpinLock.INDEX_OWNER = 1;
+// Constants for lock state management
+SpinLock.OWNER_EMPTY = 0; // Value indicating no owner
+SpinLock.STATE_UNLOCKED = 0; // Lock is available
+SpinLock.STATE_LOCKED = 1; // Lock is acquired
+SpinLock.INDEX_STATE = 0; // Index for state in array
+SpinLock.INDEX_OWNER = 1; // Index for owner in array
 //# sourceMappingURL=spinlock.js.map
