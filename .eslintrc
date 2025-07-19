@@ -6,6 +6,8 @@
   },
   "globals": {
     "Atomics": "readonly",
+    "BigInt": "readonly",
+    "BigInt64Array": "readonly",
     "SharedArrayBuffer": "readonly"
   },
   "extends": [

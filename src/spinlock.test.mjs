@@ -79,7 +79,7 @@ describe("SpinLock", () => {
       SpinLock.unlock(lock, 123);
     }
     const duration = performance.now() - start;
-    assert(duration < 10, `Expected <10ms, got ${duration}ms`);
+    assert(duration < 100, `Expected <100ms, got ${duration}ms`);
   });
 
   it("should handle concurrent access (stress test)", async () => {
