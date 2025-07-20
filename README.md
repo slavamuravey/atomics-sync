@@ -46,7 +46,7 @@ The parent/main thread must explicitly assign and pass a unique thread ID to eac
 
 Init `mutex` to work safely with `shared` data:
 ```javascript
-const shared = new Int32Array(new SharedArrayBuffer(4));
+const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
 const mutex = Mutex.init();
 ```
 
