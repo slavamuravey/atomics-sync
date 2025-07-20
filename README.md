@@ -67,6 +67,8 @@ try {
 }
 ```
 
+See [full example](example/mutex.mjs).
+
 #### Semaphore
 
 Here's a practical example demonstrating how to use a semaphore to make one thread 
@@ -93,6 +95,42 @@ Created thread performs necessary operations and notify parent thread:
 initSomeImportantThings();
 Semaphore.post(sem);
 ```
+
+See [full example](example/semaphore.mjs).
+
+#### Condition
+
+Using a condition variable, we can make one thread wait for a change in a shared variable (protected by a mutex) before proceeding with its operation.
+
+Init condition variable and mutex, allocate shared variable:
+```javascript
+const cond = Condition.init();
+const mtx = Mutex.init();
+const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
+shared[0] = -1;
+```
+
+One thread produces value:
+```javascript
+Mutex.lock(mtx, threadId);
+shared[0] = Math.floor(Math.random() * 10);
+Condition.signal(cond);
+Mutex.unlock(mtx, threadId);
+```
+
+Another thread consumes the value and makes some work with it:
+```javascript
+Mutex.lock(mtx, threadId);
+
+while (shared[0] < 0) {
+  Condition.wait(cond, mtx, threadId);
+}
+
+shared[0] *= 10;
+Mutex.unlock(mtx, threadId);
+```
+
+See [full example](example/condition.mjs).
 
 ### Documentation
 
