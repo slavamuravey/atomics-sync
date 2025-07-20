@@ -7,11 +7,11 @@ Implements essential concurrency control mechanisms using SharedArrayBuffer and 
 ### Features
 
 - [Mutex](https://github.com/slavamuravey/atomics-sync/blob/main/docs/classes/Mutex.md) - Mutual exclusion lock for critical sections
-- [SpinLock](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/SpinLock.md) - Low-level busy-wait lock for very short operations
-- [Semaphore](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Semaphore.md) - Counting semaphore for resource management
-- [Condition](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Condition.md) - Condition variables for thread signaling
-- [Barrier](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Barrier.md) - Synchronization point for multiple threads
-- [Once](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Once.md) - One-time initialization primitive
+- [SpinLock](https://github.com/slavamuravey/atomics-sync/blob/main/docs/classes/SpinLock.md) - Low-level busy-wait lock for very short operations
+- [Semaphore](https://github.com/slavamuravey/atomics-sync/blob/main/docs/classes/Semaphore.md) - Counting semaphore for resource management
+- [Condition](https://github.com/slavamuravey/atomics-sync/blob/main/docs/classes/Condition.md) - Condition variables for thread signaling
+- [Barrier](https://github.com/slavamuravey/atomics-sync/blob/main/docs/classes/Barrier.md) - Synchronization point for multiple threads
+- [Once](https://github.com/slavamuravey/atomics-sync/blob/main/docs/classes/Once.md) - One-time initialization primitive
 
 **Important**: For browsers, your server must send these headers:
 ```
