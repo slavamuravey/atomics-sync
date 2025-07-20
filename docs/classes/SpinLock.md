@@ -6,7 +6,7 @@
 
 # Class: SpinLock
 
-Defined in: [src/spinlock.ts:12](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/spinlock.ts#L12)
+Defined in: [src/spinlock.ts:12](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/spinlock.ts#L12)
 
 A spin lock implementation for low-level thread synchronization.
 Uses busy-waiting with atomic operations for acquiring the lock.
@@ -29,7 +29,7 @@ Tracks owning thread to prevent deadlocks and enforce proper usage.
 
 > `static` **init**(): `Int32Array`\<`SharedArrayBuffer`\>
 
-Defined in: [src/spinlock.ts:30](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/spinlock.ts#L30)
+Defined in: [src/spinlock.ts:30](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/spinlock.ts#L30)
 
 Initializes a new spin lock in shared memory
 
@@ -47,7 +47,7 @@ A new Int32Array backed by SharedArrayBuffer with:
 
 > `static` **lock**(`lock`, `threadId`): `void`
 
-Defined in: [src/spinlock.ts:46](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/spinlock.ts#L46)
+Defined in: [src/spinlock.ts:46](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/spinlock.ts#L46)
 
 Acquires the lock, spinning until available
 
@@ -87,7 +87,7 @@ Uses Atomics.pause() when available to reduce contention
 
 > `static` **tryLock**(`lock`, `threadId`): `boolean`
 
-Defined in: [src/spinlock.ts:78](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/spinlock.ts#L78)
+Defined in: [src/spinlock.ts:78](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/spinlock.ts#L78)
 
 Attempts to acquire the lock without spinning
 
@@ -125,7 +125,7 @@ If threadId is invalid
 
 > `static` **unlock**(`lock`, `threadId`): `void`
 
-Defined in: [src/spinlock.ts:100](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/spinlock.ts#L100)
+Defined in: [src/spinlock.ts:100](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/spinlock.ts#L100)
 
 Releases the lock
 

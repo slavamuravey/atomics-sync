@@ -6,7 +6,7 @@
 
 # Class: Mutex
 
-Defined in: [src/mutex.ts:12](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/mutex.ts#L12)
+Defined in: [src/mutex.ts:12](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/mutex.ts#L12)
 
 A mutual exclusion lock implementation for thread synchronization.
 Uses SharedArrayBuffer and Atomics for cross-thread operations.
@@ -29,7 +29,7 @@ Tracks owning thread to prevent deadlocks and enforce proper usage.
 
 > `static` **init**(): `Int32Array`\<`SharedArrayBuffer`\>
 
-Defined in: [src/mutex.ts:30](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/mutex.ts#L30)
+Defined in: [src/mutex.ts:30](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/mutex.ts#L30)
 
 Initializes a new mutex in shared memory
 
@@ -47,7 +47,7 @@ A new Int32Array backed by SharedArrayBuffer with:
 
 > `static` **lock**(`mutex`, `threadId`): `void`
 
-Defined in: [src/mutex.ts:45](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/mutex.ts#L45)
+Defined in: [src/mutex.ts:45](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/mutex.ts#L45)
 
 Acquires the mutex, blocking until available
 
@@ -83,7 +83,7 @@ If threadId is invalid
 
 > `static` **timedLock**(`mutex`, `threadId`, `timestamp`): `boolean`
 
-Defined in: [src/mutex.ts:73](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/mutex.ts#L73)
+Defined in: [src/mutex.ts:73](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/mutex.ts#L73)
 
 Attempts to acquire the mutex with a timeout
 
@@ -127,7 +127,7 @@ If threadId is invalid
 
 > `static` **tryLock**(`mutex`, `threadId`): `boolean`
 
-Defined in: [src/mutex.ts:101](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/mutex.ts#L101)
+Defined in: [src/mutex.ts:101](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/mutex.ts#L101)
 
 Attempts to acquire the mutex without blocking
 
@@ -165,7 +165,7 @@ If threadId is invalid
 
 > `static` **unlock**(`mutex`, `threadId`): `void`
 
-Defined in: [src/mutex.ts:120](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/mutex.ts#L120)
+Defined in: [src/mutex.ts:120](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/mutex.ts#L120)
 
 Releases the mutex
 

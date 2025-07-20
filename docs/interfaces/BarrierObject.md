@@ -6,7 +6,7 @@
 
 # Interface: BarrierObject
 
-Defined in: [src/barrier.ts:13](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/barrier.ts#L13)
+Defined in: [src/barrier.ts:13](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/barrier.ts#L13)
 
 Barrier object containing shared memory structures for synchronization
 barrier - stores barrier state (thread count, waited count, and generation)
@@ -19,7 +19,7 @@ cond - condition variable for threads to wait on
 
 > **barrier**: `BigInt64Array`\<`SharedArrayBuffer`\>
 
-Defined in: [src/barrier.ts:14](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/barrier.ts#L14)
+Defined in: [src/barrier.ts:14](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/barrier.ts#L14)
 
 ***
 
@@ -27,7 +27,7 @@ Defined in: [src/barrier.ts:14](https://github.com/slavamuravey/atomics-sync/blo
 
 > **cond**: `Int32Array`\<`SharedArrayBuffer`\>
 
-Defined in: [src/barrier.ts:16](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/barrier.ts#L16)
+Defined in: [src/barrier.ts:16](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/barrier.ts#L16)
 
 ***
 
@@ -35,4 +35,4 @@ Defined in: [src/barrier.ts:16](https://github.com/slavamuravey/atomics-sync/blo
 
 > **mutex**: `Int32Array`\<`SharedArrayBuffer`\>
 
-Defined in: [src/barrier.ts:15](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/barrier.ts#L15)
+Defined in: [src/barrier.ts:15](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/barrier.ts#L15)

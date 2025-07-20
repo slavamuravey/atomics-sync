@@ -6,7 +6,7 @@
 
 # Class: PermissionError
 
-Defined in: [src/errors.ts:17](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/errors.ts#L17)
+Defined in: [src/errors.ts:17](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/errors.ts#L17)
 
 Error thrown when a thread attempts an operation it doesn't have permission for,
 such as unlocking a mutex it doesn't own or accessing protected resources.
@@ -21,7 +21,7 @@ such as unlocking a mutex it doesn't own or accessing protected resources.
 
 > **new PermissionError**(`message`): `PermissionError`
 
-Defined in: [src/errors.ts:18](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/errors.ts#L18)
+Defined in: [src/errors.ts:18](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/errors.ts#L18)
 
 #### Parameters
 

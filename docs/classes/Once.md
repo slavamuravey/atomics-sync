@@ -6,7 +6,7 @@
 
 # Class: Once
 
-Defined in: [src/once.ts:8](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/once.ts#L8)
+Defined in: [src/once.ts:8](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/once.ts#L8)
 
 A synchronization primitive that ensures a function is executed only once,
 even when called from multiple threads.
@@ -28,7 +28,7 @@ Uses atomic operations for thread-safe execution tracking.
 
 > `static` **execute**(`once`, `fn`): `void`
 
-Defined in: [src/once.ts:34](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/once.ts#L34)
+Defined in: [src/once.ts:34](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/once.ts#L34)
 
 Executes the provided function exactly once, even if called from multiple threads
 
@@ -60,7 +60,7 @@ The function will be called by whichever thread wins the atomic race
 
 > `static` **init**(): `Int32Array`\<`SharedArrayBuffer`\>
 
-Defined in: [src/once.ts:21](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/once.ts#L21)
+Defined in: [src/once.ts:21](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/once.ts#L21)
 
 Initializes a new Once primitive in shared memory
 
@@ -76,7 +76,7 @@ A new Int32Array backed by SharedArrayBuffer initialized to NOT_EXECUTED
 
 > `static` **isExecuted**(`once`): `boolean`
 
-Defined in: [src/once.ts:45](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/once.ts#L45)
+Defined in: [src/once.ts:45](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/once.ts#L45)
 
 Checks if the function has been executed
 

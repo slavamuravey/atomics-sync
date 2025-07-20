@@ -6,7 +6,7 @@
 
 # Class: Condition
 
-Defined in: [src/condition.ts:10](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/condition.ts#L10)
+Defined in: [src/condition.ts:10](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/condition.ts#L10)
 
 A condition variable implementation for thread synchronization.
 Allows threads to wait for some condition to become true while properly releasing
@@ -28,7 +28,7 @@ and reacquiring a mutex lock. Uses SharedArrayBuffer for cross-thread communicat
 
 > `static` **broadcast**(`cond`): `void`
 
-Defined in: [src/condition.ts:31](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/condition.ts#L31)
+Defined in: [src/condition.ts:31](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/condition.ts#L31)
 
 Wakes up all threads waiting on the condition variable
 
@@ -50,7 +50,7 @@ The condition variable to broadcast to
 
 > `static` **init**(): `Int32Array`\<`SharedArrayBuffer`\>
 
-Defined in: [src/condition.ts:15](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/condition.ts#L15)
+Defined in: [src/condition.ts:15](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/condition.ts#L15)
 
 Initializes a new condition variable in shared memory
 
@@ -66,7 +66,7 @@ A new Int32Array backed by SharedArrayBuffer
 
 > `static` **signal**(`cond`): `void`
 
-Defined in: [src/condition.ts:23](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/condition.ts#L23)
+Defined in: [src/condition.ts:23](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/condition.ts#L23)
 
 Wakes up one thread waiting on the condition variable
 
@@ -88,7 +88,7 @@ The condition variable to signal
 
 > `static` **timedWait**(`cond`, `mutex`, `threadId`, `timestamp`): `boolean`
 
-Defined in: [src/condition.ts:61](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/condition.ts#L61)
+Defined in: [src/condition.ts:61](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/condition.ts#L61)
 
 Blocks the current thread until either:
 - The condition variable is signaled, or
@@ -136,7 +136,7 @@ Automatically releases mutex before waiting and reacquires after
 
 > `static` **wait**(`cond`, `mutex`, `threadId`): `void`
 
-Defined in: [src/condition.ts:42](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/condition.ts#L42)
+Defined in: [src/condition.ts:42](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/condition.ts#L42)
 
 Blocks the current thread until the condition variable is signaled
 

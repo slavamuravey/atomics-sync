@@ -6,7 +6,7 @@
 
 # Class: InvalidError
 
-Defined in: [src/errors.ts:29](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/errors.ts#L29)
+Defined in: [src/errors.ts:29](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/errors.ts#L29)
 
 Error thrown when invalid arguments or operations are detected,
 such as passing non-integer values where integers are required,
@@ -22,7 +22,7 @@ or attempting operations on improperly initialized objects.
 
 > **new InvalidError**(`message`): `InvalidError`
 
-Defined in: [src/errors.ts:30](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/errors.ts#L30)
+Defined in: [src/errors.ts:30](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/errors.ts#L30)
 
 #### Parameters
 

@@ -6,7 +6,7 @@
 
 # Class: DeadlockError
 
-Defined in: [src/errors.ts:6](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/errors.ts#L6)
+Defined in: [src/errors.ts:6](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/errors.ts#L6)
 
 Error thrown when a deadlock situation is detected in synchronization primitives.
 This typically occurs when threads are circularly waiting for resources/locks
@@ -22,7 +22,7 @@ held by each other.
 
 > **new DeadlockError**(`message`): `DeadlockError`
 
-Defined in: [src/errors.ts:7](https://github.com/slavamuravey/atomics-sync/blob/75e5db5e81c583024857ae60b2746ded23c99a17/src/errors.ts#L7)
+Defined in: [src/errors.ts:7](https://github.com/slavamuravey/atomics-sync/blob/e6320d46ab97f64759045c6429441230b766eb51/src/errors.ts#L7)
 
 #### Parameters
 
