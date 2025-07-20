@@ -132,6 +132,74 @@ Mutex.unlock(mtx, threadId);
 
 See [full example](example/condition.mjs).
 
+#### SpinLock
+
+A spinlock provides an interface nearly identical to a mutex (lock()/unlock()), 
+but is optimized for very short wait times where spinning (busy-waiting) is more efficient than thread suspension.
+
+#### Barrier
+
+A barrier synchronizes multiple threads at a specific execution point.
+
+In this example, we launch 10 threads that execute at variable speeds and create a barrier with a count of 5.
+
+```javascript
+// main.js
+
+const barrier = Barrier.init(5);
+
+for (let i = 0; i < 10; i++) {
+  const threadId = i + 1;
+  const worker = new Worker("./worker.js", {
+    workerData: { threadId, barrier }
+  });
+}
+
+// worker.js
+
+setTimeout(() => {
+  // ...
+  Barrier.wait(barrier, threadId);
+  // ...
+}, threadId * 100);
+```
+
+The first 5 threads to reach the barrier will block and wait.
+
+Once the 5th thread arrives, the barrier releases all waiting threads.
+
+The remaining 5 threads then proceed through the barrier in the same way.
+
+See [full example](example/barrier.mjs).
+
+#### Once
+
+A Once primitive ensures one-time initialization in concurrent environments.
+
+Init once value:
+
+```javascript
+const once = Once.init();
+```
+
+Pass it into some threads:
+
+```javascript
+const worker = new Worker("./worker.js", {
+  workerData: { once }
+});
+```
+
+Within thread:
+
+```javascript
+Once.execute(once, () => {
+  // some logic that should be executed only once
+});
+```
+
+See [full example](example/once.mjs).
+
 ### Documentation
 
 For complete API reference, see
