@@ -16,8 +16,9 @@ export declare class Semaphore {
     /**
      * Acquires a permit, blocking until one is available
      * @param sem The semaphore to wait on
-     * @note Uses atomic compare-exchange to safely decrement counter
-     * @note Efficiently waits when no permits are available
+     * @remarks
+     * - Uses atomic compare-exchange to safely decrement counter
+     * - Efficiently waits when no permits are available
      */
     static wait(sem: Int32Array<SharedArrayBuffer>): void;
     /**
@@ -37,7 +38,7 @@ export declare class Semaphore {
      * Releases a permit back to the semaphore
      * @param sem The semaphore to post to
      * @throws {RangeError} If incrementing would exceed INT32_MAX_VALUE
-     * @note Wakes one waiting thread if counter transitions from 0 to 1
+     * @remarks Wakes one waiting thread if counter transitions from 0 to 1
      */
     static post(sem: Int32Array<SharedArrayBuffer>): void;
     /**

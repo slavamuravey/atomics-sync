@@ -6,12 +6,12 @@ Implements essential concurrency control mechanisms using SharedArrayBuffer and 
 
 ### Features
 
-- Mutex - Mutual exclusion lock for critical sections
-- SpinLock - Low-level busy-wait lock for very short operations
-- Semaphore - Counting semaphore for resource management
-- Condition - Condition variables for thread signaling
-- Barrier - Synchronization point for multiple threads
-- Once - One-time initialization primitive
+- [Mutex](docs/classes/Mutex.md) - Mutual exclusion lock for critical sections
+- [SpinLock](docs/classes/SpinLock.md) - Low-level busy-wait lock for very short operations
+- [Semaphore](docs/classes/Semaphore.md) - Counting semaphore for resource management
+- [Condition](docs/classes/Condition.md) - Condition variables for thread signaling
+- [Barrier](docs/classes/Barrier.md) - Synchronization point for multiple threads
+- [Once](docs/classes/Once.md) - One-time initialization primitive
 
 **Important**: For browsers, your server must send these headers:
 ```
@@ -66,3 +66,7 @@ try {
   Mutex.unlock(mutex, threadId);
 }
 ```
+### Documentation
+
+For complete API reference, see
+[API documentation](docs/README.md)

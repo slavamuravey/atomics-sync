@@ -32,7 +32,7 @@ export class Condition {
      * @param cond The condition variable to wait on
      * @param mutex The associated mutex to release while waiting
      * @param threadId The ID of the current thread
-     * @note Automatically releases mutex before waiting and reacquires after
+     * @remarks Automatically releases mutex before waiting and reacquires after
      */
     static wait(cond, mutex, threadId) {
         Mutex.unlock(mutex, threadId);
@@ -48,7 +48,7 @@ export class Condition {
      * @param threadId The ID of the current thread
      * @param timestamp The absolute timeout timestamp in milliseconds
      * @returns true if the condition was signaled, false if timed out
-     * @note Automatically releases mutex before waiting and reacquires after
+     * @remarks Automatically releases mutex before waiting and reacquires after
      */
     static timedWait(cond, mutex, threadId, timestamp) {
         try {

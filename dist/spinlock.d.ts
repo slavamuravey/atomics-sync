@@ -23,7 +23,7 @@ export declare class SpinLock {
      * @param threadId Unique identifier for the calling thread
      * @throws {DeadlockError} If thread already owns the lock
      * @throws {InvalidError} If threadId is invalid
-     * @note Uses Atomics.pause() when available to reduce contention
+     * @remarks Uses Atomics.pause() when available to reduce contention
      */
     static lock(lock: Int32Array<SharedArrayBuffer>, threadId: number): void;
     /**

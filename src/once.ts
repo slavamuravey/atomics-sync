@@ -29,7 +29,7 @@ export class Once {
    * Executes the provided function exactly once, even if called from multiple threads
    * @param once The Once primitive to use for synchronization
    * @param fn The function to execute (will be called at most once)
-   * @note The function will be called by whichever thread wins the atomic race
+   * @remarks The function will be called by whichever thread wins the atomic race
    */
   static execute(once: Int32Array<SharedArrayBuffer>, fn: () => void) {
     if (compareExchange(once, Once.INDEX_EXECUTED, Once.EXECUTED_NO, Once.EXECUTED_YES) === Once.EXECUTED_NO) {

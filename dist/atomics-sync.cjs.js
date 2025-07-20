@@ -215,8 +215,9 @@ class Semaphore {
     /**
      * Acquires a permit, blocking until one is available
      * @param sem The semaphore to wait on
-     * @note Uses atomic compare-exchange to safely decrement counter
-     * @note Efficiently waits when no permits are available
+     * @remarks
+     * - Uses atomic compare-exchange to safely decrement counter
+     * - Efficiently waits when no permits are available
      */
     static wait(sem) {
         for (;;) {
@@ -274,7 +275,7 @@ class Semaphore {
      * Releases a permit back to the semaphore
      * @param sem The semaphore to post to
      * @throws {RangeError} If incrementing would exceed INT32_MAX_VALUE
-     * @note Wakes one waiting thread if counter transitions from 0 to 1
+     * @remarks Wakes one waiting thread if counter transitions from 0 to 1
      */
     static post(sem) {
         for (;;) {
@@ -335,7 +336,7 @@ class Condition {
      * @param cond The condition variable to wait on
      * @param mutex The associated mutex to release while waiting
      * @param threadId The ID of the current thread
-     * @note Automatically releases mutex before waiting and reacquires after
+     * @remarks Automatically releases mutex before waiting and reacquires after
      */
     static wait(cond, mutex, threadId) {
         Mutex.unlock(mutex, threadId);
@@ -351,7 +352,7 @@ class Condition {
      * @param threadId The ID of the current thread
      * @param timestamp The absolute timeout timestamp in milliseconds
      * @returns true if the condition was signaled, false if timed out
-     * @note Automatically releases mutex before waiting and reacquires after
+     * @remarks Automatically releases mutex before waiting and reacquires after
      */
     static timedWait(cond, mutex, threadId, timestamp) {
         try {
@@ -466,7 +467,7 @@ class SpinLock {
      * @param threadId Unique identifier for the calling thread
      * @throws {DeadlockError} If thread already owns the lock
      * @throws {InvalidError} If threadId is invalid
-     * @note Uses Atomics.pause() when available to reduce contention
+     * @remarks Uses Atomics.pause() when available to reduce contention
      */
     static lock(lock, threadId) {
         SpinLock.checkThreadIdBeforeLock(lock, threadId);
@@ -582,7 +583,7 @@ class Once {
      * Executes the provided function exactly once, even if called from multiple threads
      * @param once The Once primitive to use for synchronization
      * @param fn The function to execute (will be called at most once)
-     * @note The function will be called by whichever thread wins the atomic race
+     * @remarks The function will be called by whichever thread wins the atomic race
      */
     static execute(once, fn) {
         if (compareExchange(once, Once.INDEX_EXECUTED, Once.EXECUTED_NO, Once.EXECUTED_YES) === Once.EXECUTED_NO) {
