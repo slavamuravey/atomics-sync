@@ -74,7 +74,7 @@ describe("Semaphore", () => {
 
   it("post should notify waiting threads", () => {
     const sem = Semaphore.init(0);
-    const shared = new Int32Array(new SharedArrayBuffer(4));
+    const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
     // eslint-disable-next-line no-new
     new Worker("./src/workers/semaphore/notificator.mjs", { workerData: { sem, shared } });
     Semaphore.wait(sem);

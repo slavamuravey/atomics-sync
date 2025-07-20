@@ -1,6 +1,6 @@
 import { parentPort, workerData } from "worker_threads";
 
-import { Mutex } from "../../dist/index.js";
+import { Mutex } from "../../../dist/index.js";
 
 const { shared, mtx, threadId } = workerData;
 Mutex.lock(mtx, threadId);

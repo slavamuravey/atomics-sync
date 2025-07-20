@@ -94,7 +94,7 @@ describe("Mutex", () => {
     const THREADS = 10;
     const promises = [];
     const mtx = Mutex.init();
-    const shared = new Int32Array(new SharedArrayBuffer(4));
+    const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
 
     for (let i = 0; i < THREADS; i++) {
       const worker = new Worker("./src/workers/mutex/incrementer.mjs", {

@@ -18,7 +18,7 @@ describe("Condition", () => {
     const threadId = 123;
     const promises = [];
     const THREADS = 10;
-    const shared = new Int32Array(new SharedArrayBuffer(4));
+    const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
 
     for (let i = 0; i < THREADS; i++) {
       const worker = new Worker("./src/workers/condition/waiter.mjs", {
@@ -53,7 +53,7 @@ describe("Condition", () => {
     const threadId = 123;
     const promises = [];
     const THREADS = 10;
-    const shared = new Int32Array(new SharedArrayBuffer(4));
+    const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
 
     for (let i = 0; i < THREADS; i++) {
       const worker = new Worker("./src/workers/condition/waiter.mjs", {
