@@ -1,6 +1,6 @@
 {
   "name": "atomics-sync",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/slavamuravey/atomics-sync",
   "description": "JavaScript multithreading synchronization library",
   "source": "src/index.ts",
