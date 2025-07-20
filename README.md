@@ -66,7 +66,35 @@ try {
   Mutex.unlock(mutex, threadId);
 }
 ```
+
+#### Semaphore
+
+Here's a practical example demonstrating how to use a semaphore to make one thread 
+wait for another thread to complete certain actions:
+
+Init semaphore:
+```javascript
+const sem = Semaphore.init(0);
+```
+
+One thread creates another thread and must wait some initialization actions within it:
+
+```javascript
+new Worker("./worker.js", { workerData: { sem } });
+Semaphore.wait(sem);
+// continue execution
+// ...
+```
+
+Created thread performs necessary operations and notify parent thread:
+
+```javascript
+// ...
+initSomeImportantThings();
+Semaphore.post(sem);
+```
+
 ### Documentation
 
 For complete API reference, see
-[API documentation](docs/README.md)
+[API documentation](docs/README.md).
