@@ -6,12 +6,12 @@ Implements essential concurrency control mechanisms using SharedArrayBuffer and 
 
 ### Features
 
-- [Mutex](docs/classes/Mutex.md) - Mutual exclusion lock for critical sections
-- [SpinLock](docs/classes/SpinLock.md) - Low-level busy-wait lock for very short operations
-- [Semaphore](docs/classes/Semaphore.md) - Counting semaphore for resource management
-- [Condition](docs/classes/Condition.md) - Condition variables for thread signaling
-- [Barrier](docs/classes/Barrier.md) - Synchronization point for multiple threads
-- [Once](docs/classes/Once.md) - One-time initialization primitive
+- [Mutex](https://github.com/slavamuravey/atomics-sync/blob/main/docs/classes/Mutex.md) - Mutual exclusion lock for critical sections
+- [SpinLock](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/SpinLock.md) - Low-level busy-wait lock for very short operations
+- [Semaphore](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Semaphore.md) - Counting semaphore for resource management
+- [Condition](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Condition.md) - Condition variables for thread signaling
+- [Barrier](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Barrier.md) - Synchronization point for multiple threads
+- [Once](https://github.com/slavamuravey/atomics-sync/blob/main/docs/docs/classes/Once.md) - One-time initialization primitive
 
 **Important**: For browsers, your server must send these headers:
 ```
@@ -46,7 +46,9 @@ The parent/main thread must explicitly assign and pass a unique thread ID to eac
 
 Init `mutex` to work safely with `shared` data:
 ```javascript
-const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
+const shared = new Int32Array(
+  new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT)
+);
 const mutex = Mutex.init();
 ```
 
@@ -67,7 +69,7 @@ try {
 }
 ```
 
-See [full example](example/mutex.mjs).
+See [full example](https://github.com/slavamuravey/atomics-sync/blob/main/example/mutex.mjs).
 
 #### Semaphore
 
@@ -96,7 +98,7 @@ initSomeImportantThings();
 Semaphore.post(sem);
 ```
 
-See [full example](example/semaphore.mjs).
+See [full example](https://github.com/slavamuravey/atomics-sync/blob/main/example/semaphore.mjs).
 
 #### Condition
 
@@ -106,7 +108,9 @@ Init condition variable and mutex, allocate shared variable:
 ```javascript
 const cond = Condition.init();
 const mtx = Mutex.init();
-const shared = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
+const shared = new Int32Array(
+  new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT)
+);
 shared[0] = -1;
 ```
 
@@ -130,7 +134,7 @@ shared[0] *= 10;
 Mutex.unlock(mtx, threadId);
 ```
 
-See [full example](example/condition.mjs).
+See [full example](https://github.com/slavamuravey/atomics-sync/blob/main/example/condition.mjs).
 
 #### SpinLock
 
@@ -170,7 +174,7 @@ Once the 5th thread arrives, the barrier releases all waiting threads.
 
 The remaining 5 threads then proceed through the barrier in the same way.
 
-See [full example](example/barrier.mjs).
+See [full example](https://github.com/slavamuravey/atomics-sync/blob/main/example/barrier.mjs).
 
 #### Once
 
@@ -198,9 +202,9 @@ Once.execute(once, () => {
 });
 ```
 
-See [full example](example/once.mjs).
+See [full example](https://github.com/slavamuravey/atomics-sync/blob/main/example/once.mjs).
 
 ### Documentation
 
 For complete API reference, see
-[API documentation](docs/README.md).
+[API documentation](https://github.com/slavamuravey/atomics-sync/blob/main/docs/README.md).
