@@ -4,16 +4,12 @@
   "homepage": "https://github.com/slavamuravey/atomics-sync",
   "description": "JavaScript multithreading synchronization library",
   "source": "src/index.ts",
-  "exports": {
-    "require": "./dist/index.js",
-    "import": "./es/index.js",
-    "umd": "./dist/atomics-sync.umd.min.js"
-  },
   "main": "dist/index.js",
   "umd:main": "dist/atomics-sync.umd.min.js",
   "unpkg": "dist/atomics-sync.umd.min.js",
-  "module": "es/index.js",
+  "module": "dist/atomics-sync.esm.js",
   "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "build": "npm run build:es && npm run build:dist && npm run build:types && npm run docs",
     "build:dist": "npm run build:dist:dev && npm run build:dist:prod",
